@@ -1,22 +1,20 @@
 :root {
-  --bg: #282828;
-  --bg-soft: #32302f;
-  --bg-alt: #3c3836;
+  --bg: #000000;
+  --bg-soft: #1a1a1a;
+  --bg-alt: #2d2d2d;
 
-  --fg: #ebdbb2;
-  --fg-soft: #d5c4a1;
-  --fg-alt: #a89984;
+  --fg: #ffffff;
+  --fg-soft: #e5e5e5;
+  --fg-alt: #999999;
 
-  --red: #cc241d;
-  --green: #98971a;
-  --yellow: #d79921;
-  --blue: #458588;
-  --purple: #b16286;
-  --aqua: #689d6a;
-  --orange: #d65d0e;
-
-  --border: #504945;
-  --placeholder: #928374;
+  --accent: #ffffff;
+  --accent-soft: #cccccc;
+  --accent-dark: #666666;
+  
+  --border: #404040;
+  --placeholder: #777777;
+  --error: #ffffff;
+  --success: #ffffff;
 }
 
 * {
@@ -27,7 +25,7 @@
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: linear-gradient(-45deg, var(--bg), #2d2d2d, var(--bg-soft), #3a3a3a);
+  background: linear-gradient(-45deg, var(--bg), #111111, var(--bg-soft), #222222);
   background-size: 400% 400%;
   animation: gradientFlow 15s ease infinite;
   color: var(--fg);
@@ -57,7 +55,7 @@ body {
   position: absolute;
   width: 2px;
   height: 2px;
-  background: var(--yellow);
+  background: var(--accent);
   border-radius: 50%;
   opacity: 0.3;
   animation: float 20s infinite linear;
@@ -83,15 +81,15 @@ body {
 .content-wrapper {
   width: 100%;
   max-width: 420px;
-  background: rgba(60, 56, 54, 0.95);
+  background: rgba(45, 45, 45, 0.95);
   backdrop-filter: blur(20px);
   border: 1px solid var(--border);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 
-    0 20px 40px rgba(0,0,0,0.4),
-    0 0 0 1px rgba(235, 219, 178, 0.1),
-    inset 0 1px 0 rgba(235, 219, 178, 0.1);
+    0 20px 40px rgba(0,0,0,0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
 }
@@ -103,7 +101,7 @@ body {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--yellow), transparent);
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
   animation: shimmer 3s ease-in-out infinite;
 }
 
@@ -139,7 +137,7 @@ body {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(215, 153, 33, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
   animation: rotate 20s linear infinite;
 }
 
@@ -157,7 +155,7 @@ body {
   background: linear-gradient(135deg, var(--bg), var(--bg-soft));
   border: 2px solid var(--border);
   border-radius: 12px;
-  color: var(--yellow);
+  color: var(--accent);
   margin-bottom: 1.5rem;
   position: relative;
   z-index: 1;
@@ -167,13 +165,13 @@ body {
 
 .icon-container:hover {
   transform: scale(1.1) rotate(5deg);
-  border-color: var(--yellow);
-  box-shadow: 0 8px 25px rgba(215, 153, 33, 0.3);
+  border-color: var(--accent);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
 }
 
 @keyframes iconPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(215, 153, 33, 0.4); }
-  50% { box-shadow: 0 0 0 8px rgba(215, 153, 33, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(255, 255, 255, 0); }
 }
 
 h1 {
@@ -252,7 +250,7 @@ h1 {
   font-size: 0.9rem;
   font-family: inherit;
   font-weight: 500;
-  background: rgba(40, 40, 40, 0.8);
+  background: rgba(0, 0, 0, 0.8);
   color: var(--fg);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
@@ -267,18 +265,18 @@ h1 {
 
 .form-input:hover {
   border-color: var(--fg-alt);
-  background: rgba(40, 40, 40, 0.9);
+  background: rgba(0, 0, 0, 0.9);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .form-input:focus {
-  border-color: var(--yellow);
+  border-color: var(--accent);
   box-shadow: 
-    0 0 0 3px rgba(215, 153, 33, 0.15),
+    0 0 0 3px rgba(255, 255, 255, 0.15),
     0 8px 25px rgba(0,0,0,0.1);
   transform: translateY(-2px);
-  background: rgba(40, 40, 40, 1);
+  background: rgba(0, 0, 0, 1);
 }
 
 .form-input:focus::placeholder {
@@ -287,8 +285,8 @@ h1 {
 }
 
 .form-input.error {
-  border-color: var(--red);
-  box-shadow: 0 0 0 3px rgba(204, 36, 29, 0.15);
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
   animation: shake 0.5s ease-in-out;
 }
 
@@ -304,7 +302,7 @@ h1 {
   gap: 0.5rem;
   margin-top: 0.75rem;
   font-size: 0.8rem;
-  color: var(--red);
+  color: var(--error);
   font-weight: 500;
   opacity: 0;
   transform: translateY(-10px);
@@ -346,7 +344,7 @@ h1 {
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  background: linear-gradient(135deg, var(--yellow), #fabd2f);
+  background: linear-gradient(135deg, var(--accent), var(--accent-soft));
   color: var(--bg);
   border: none;
   border-radius: 10px;
@@ -359,7 +357,7 @@ h1 {
   position: relative;
   overflow: hidden;
   box-shadow: 
-    0 4px 15px rgba(215, 153, 33, 0.3),
+    0 4px 15px rgba(255, 255, 255, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
@@ -379,22 +377,22 @@ h1 {
 }
 
 .submit-button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #fabd2f, #fdd835);
+  background: linear-gradient(135deg, var(--accent-soft), #dddddd);
   transform: translateY(-2px);
   box-shadow: 
-    0 8px 25px rgba(215, 153, 33, 0.4),
+    0 8px 25px rgba(255, 255, 255, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .submit-button:active {
   transform: translateY(0);
   box-shadow: 
-    0 2px 10px rgba(215, 153, 33, 0.3),
+    0 2px 10px rgba(255, 255, 255, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .submit-button:disabled {
-  background: linear-gradient(135deg, var(--placeholder), #999);
+  background: linear-gradient(135deg, var(--placeholder), #555);
   cursor: not-allowed;
   color: var(--bg);
   transform: none;
@@ -404,8 +402,8 @@ h1 {
 .submit-button:focus-visible {
   box-shadow: 
     0 0 0 3px var(--bg), 
-    0 0 0 6px var(--yellow),
-    0 4px 15px rgba(215, 153, 33, 0.3);
+    0 0 0 6px var(--accent),
+    0 4px 15px rgba(255, 255, 255, 0.3);
 }
 
 .submit-button svg {
@@ -444,6 +442,27 @@ h1 {
   transform: scale(1.1);
 }
 
+/* Japanese Kanji Credit */
+.kanji-credit {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 0.7rem;
+  color: var(--fg-alt);
+  opacity: 0.6;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: 'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif;
+  letter-spacing: 0.1em;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+  user-select: none;
+}
+
+.kanji-credit:hover {
+  opacity: 1;
+}
+
 /* Loading state */
 .submit-button.loading {
   position: relative;
@@ -459,7 +478,7 @@ h1 {
   position: absolute;
   width: 20px;
   height: 20px;
-  border: 2px solid rgba(40, 40, 40, 0.3);
+  border: 2px solid rgba(0, 0, 0, 0.3);
   border-top: 2px solid var(--bg);
   border-radius: 50%;
   animation: buttonSpin 1s linear infinite;
@@ -477,7 +496,7 @@ h1 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(40, 40, 40, 0.98);
+  background: rgba(0, 0, 0, 0.98);
   backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
@@ -547,7 +566,7 @@ h1 {
   position: absolute;
   width: 8px;
   height: 8px;
-  background: var(--yellow);
+  background: var(--accent);
   border-radius: 50%;
   opacity: 0;
 }
@@ -603,75 +622,6 @@ h1 {
 @keyframes fadeIn {
   to { opacity: 1; }
 }
-
-/* Responsive Design */
-@media (max-width: 480px) {
-  .page-container {
-    padding: 1rem 0.75rem;
-  }
-
-  .content-wrapper {
-    border-radius: 12px;
-  }
-
-  .header-section {
-    padding: 2rem 1.5rem 1.25rem;
-  }
-
-  .form-container {
-    padding: 2rem 1.5rem;
-  }
-
-  h1 {
-    font-size: 1.5rem;
-  }
-
-  .form-input {
-    height: 44px;
-  }
-
-  .submit-button {
-    height: 48px;
-  }
-}
-
-/* Accessibility improvements */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-
-  body {
-    background: var(--bg);
-  }
-
-  .content-wrapper::before {
-    display: none;
-  }
-
-  .header-section::before {
-    display: none;
-  }
-
-  .floating-particles {
-    display: none;
-  }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .form-input {
-    border-width: 3px;
-  }
-
-  .submit-button {
-    border: 2px solid transparent;
-  }
-}
-
-/* Add these styles to your existing form.css */
 
 /* Error icon animations */
 .error-icon {
@@ -744,24 +694,24 @@ h1 {
 
 /* Pulse animation for error states */
 .form-input.error {
-  border-color: var(--red);
-  box-shadow: 0 0 0 3px rgba(204, 36, 29, 0.15);
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
   animation: shake 0.5s ease-in-out, errorPulse 2s ease-in-out infinite;
 }
 
 @keyframes errorPulse {
   0%, 100% { 
-    box-shadow: 0 0 0 3px rgba(204, 36, 29, 0.15);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
   }
   50% { 
-    box-shadow: 0 0 0 3px rgba(204, 36, 29, 0.25);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
   }
 }
 
 /* Warning state for real-time validation */
 .form-input.warning {
-  border-color: var(--yellow);
-  box-shadow: 0 0 0 2px rgba(215, 153, 33, 0.1);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
 /* Enhanced loading animation */
@@ -770,15 +720,10 @@ h1 {
   position: absolute;
   width: 20px;
   height: 20px;
-  border: 2px solid rgba(40, 40, 40, 0.2);
+  border: 2px solid rgba(0, 0, 0, 0.2);
   border-top: 2px solid var(--bg);
   border-radius: 50%;
   animation: buttonSpin 1s linear infinite;
-}
-
-@keyframes buttonSpin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
 }
 
 /* Improved particle animations */
@@ -797,8 +742,42 @@ h1 {
   }
 }
 
-/* Responsive improvements */
+/* Responsive Design */
 @media (max-width: 480px) {
+  .page-container {
+    padding: 1rem 0.75rem;
+  }
+
+  .content-wrapper {
+    border-radius: 12px;
+  }
+
+  .header-section {
+    padding: 2rem 1.5rem 1.25rem;
+  }
+
+  .form-container {
+    padding: 2rem 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .form-input {
+    height: 44px;
+  }
+
+  .submit-button {
+    height: 48px;
+  }
+
+  .kanji-credit {
+    bottom: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.65rem;
+  }
+
   .success-content {
     padding: 2rem 1.5rem;
   }
@@ -819,24 +798,30 @@ h1 {
   }
 }
 
-/* High contrast mode improvements */
-@media (prefers-contrast: high) {
-  .error-icon {
-    stroke: #ff0000;
-  }
-  
-  .already-subscribed-icon {
-    stroke: #ffaa00;
-  }
-  
-  .form-input.error {
-    border-width: 3px;
-    border-color: #ff0000;
-  }
-}
-
-/* Reduced motion preferences */
+/* Accessibility improvements */
 @media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  body {
+    background: var(--bg);
+  }
+
+  .content-wrapper::before {
+    display: none;
+  }
+
+  .header-section::before {
+    display: none;
+  }
+
+  .floating-particles {
+    display: none;
+  }
+
   .error-icon,
   .already-subscribed-icon,
   .checkmark {
@@ -860,5 +845,29 @@ h1 {
   
   .form-input.error {
     animation: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .form-input {
+    border-width: 3px;
+  }
+
+  .submit-button {
+    border: 2px solid transparent;
+  }
+
+  .error-icon {
+    stroke: #ffffff;
+  }
+  
+  .already-subscribed-icon {
+    stroke: #ffffff;
+  }
+  
+  .form-input.error {
+    border-width: 3px;
+    border-color: #ffffff;
   }
 }
