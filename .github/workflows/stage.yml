@@ -1,0 +1,26 @@
+name: Deploy to Staging
+
+on:
+  push:
+    branches:
+      - sub
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Deploy to EC2 Staging'
+        uses: appleboy/ssh-action@v0.1.9
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu  # adjust if needed
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /staging/form-stage/form/
+            # Set git credentials for authenticated pull
+            git config credential.helper store
+            echo "https://${{ secrets.GIT_AUTH_USERNAME }}:${{ secrets.GIT_AUTH_PASSWORD }}@github.com" > ~/.git-credentials
+            git pull origin sub
+            docker-compose up -d --build
+
