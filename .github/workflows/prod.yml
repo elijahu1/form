@@ -17,7 +17,7 @@ jobs:
           username: ubuntu # Or your EC2 user (ec2-user, ubuntu, etc.)
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /prod/form-prod/form/
+            cd ~/form-prod/form/
             # Pull latest changes with auth
             git config credential.helper store
             echo "https://${{ secrets.GIT_AUTH_USERNAME }}:${{ secrets.GIT_AUTH_PASSWORD }}@github.com" > ~/.git-credentials

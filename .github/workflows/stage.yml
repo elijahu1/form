@@ -17,7 +17,7 @@ jobs:
           username: ubuntu  # adjust if needed
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd ~/staging/form-stage/form/
+            cd ~/form-stage/form/
             # Set git credentials for authenticated pull
             git config credential.helper store
             echo "https://${{ secrets.GIT_AUTH_USERNAME }}:${{ secrets.GIT_AUTH_PASSWORD }}@github.com" > ~/.git-credentials
