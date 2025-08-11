@@ -1,0 +1,26 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Deploy to EC2'
+        uses: appleboy/ssh-action@v0.1.9
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu # Or your EC2 user (ec2-user, ubuntu, etc.)
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /prod/form-prod/form/
+            # Pull latest changes with auth
+            git config credential.helper store
+            echo "https://${{ secrets.GIT_AUTH_USERNAME }}:${{ secrets.GIT_AUTH_PASSWORD }}@github.com" > ~/.git-credentials
+            git pull origin main
+            docker-compose up -d --build
+
