@@ -1,0 +1,1042 @@
+:root {
+  --bg: #000000;
+  --bg-soft: #1a1a1a;
+  --bg-alt: #2d2d2d;
+
+  --fg: #ffffff;
+  --fg-soft: #e5e5e5;
+  --fg-alt: #999999;
+
+  --accent: #ffffff;
+  --accent-soft: #cccccc;
+  --accent-dark: #666666;
+  
+  --border: #404040;
+  --placeholder: #777777;
+  --error: #ffffff;
+  --success: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(-45deg, var(--bg), #111111, var(--bg-soft), #222222);
+  background-size: 400% 400%;
+  animation: gradientFlow 15s ease infinite;
+  color: var(--fg);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.floating-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle-dot {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: float 20s infinite linear;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.3; }
+  90% { opacity: 0.1; }
+  100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.content-wrapper {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(45, 45, 45, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 
+    0 20px 40px rgba(0,0,0,0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.content-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.8; }
+}
+
+.header-section {
+  padding: 2.5rem 2rem 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, var(--bg-soft), var(--bg-alt));
+  position: relative;
+  overflow: hidden;
+}
+
+.header-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.icon-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--bg), var(--bg-soft));
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+  animation: iconPulse 2s ease-in-out infinite;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.icon-container:hover {
+  transform: scale(1.1) rotate(5deg);
+  border-color: var(--accent);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes iconPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(255, 255, 255, 0); }
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--fg);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
+  animation: textSlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: var(--fg-alt);
+  font-weight: 400;
+  line-height: 1.5;
+  position: relative;
+  z-index: 1;
+  animation: textSlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+@keyframes textSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-container {
+  padding: 2.5rem 2rem;
+  animation: formSlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+@keyframes formSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.input-group:last-of-type {
+  margin-bottom: 2rem;
+}
+
+.input-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.01em;
+  transition: all 0.3s ease;
+}
+
+.form-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 1rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.8);
+  color: var(--fg);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.form-input::placeholder {
+  color: var(--placeholder);
+  transition: all 0.3s ease;
+}
+
+.form-input:hover {
+  border-color: var(--fg-alt);
+  background: rgba(0, 0, 0, 0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.form-input:focus {
+  border-color: var(--accent);
+  box-shadow: 
+    0 0 0 3px rgba(255, 255, 255, 0.15),
+    0 8px 25px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+  background: rgba(0, 0, 0, 1);
+}
+
+.form-input:focus::placeholder {
+  opacity: 0.6;
+  transform: translateX(4px);
+}
+
+.form-input.error {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* Checkbox Styles */
+.checkbox-group {
+  margin-bottom: 1.75rem;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+  position: relative;
+  line-height: 1.4;
+  transition: all 0.3s ease;
+}
+
+.checkbox-container:hover {
+  transform: translateY(-1px);
+}
+
+.checkbox-container input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+  margin-top: 1px;
+  backdrop-filter: blur(10px);
+}
+
+.checkbox-container:hover .checkmark {
+  border-color: var(--fg-alt);
+  background: rgba(0, 0, 0, 0.9);
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 
+    0 0 0 3px rgba(255, 255, 255, 0.15),
+    0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 6px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid var(--bg);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  animation: checkmarkSlide 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+@keyframes checkmarkSlide {
+  0% {
+    opacity: 0;
+    transform: rotate(45deg) scale(0) translateY(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(45deg) scale(1) translateY(0);
+  }
+}
+
+.checkbox-text {
+  font-size: 0.85rem;
+  color: var(--fg-soft);
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
+.checkbox-container:hover .checkbox-text {
+  color: var(--fg);
+}
+
+.terms-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.terms-link:hover {
+  color: var(--accent-soft);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.terms-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: -1px;
+  left: 0;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.terms-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Error state for checkbox */
+.checkbox-container.error .checkmark {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+  animation: shake 0.5s ease-in-out;
+}
+
+.error-message {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--error);
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.error-message.show {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  animation: errorSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes errorSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.error-message svg {
+  flex-shrink: 0;
+  animation: errorIconPulse 0.6s ease-in-out;
+}
+
+@keyframes errorIconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.submit-button {
+  width: 100%;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+  color: var(--bg);
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 15px rgba(255, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.submit-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.6s;
+}
+
+.submit-button:hover::before {
+  left: 100%;
+}
+
+.submit-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--accent-soft), #dddddd);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px rgba(255, 255, 255, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 2px 10px rgba(255, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.submit-button:disabled {
+  background: linear-gradient(135deg, var(--placeholder), #555);
+  cursor: not-allowed;
+  color: var(--bg);
+  transform: none;
+  box-shadow: none;
+}
+
+.submit-button:focus-visible {
+  box-shadow: 
+    0 0 0 3px var(--bg), 
+    0 0 0 6px var(--accent),
+    0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+.submit-button svg {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.submit-button:hover svg {
+  transform: translateX(2px);
+}
+
+.footer-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--fg-alt);
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.footer-note:hover {
+  opacity: 1;
+}
+
+.footer-note svg {
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.footer-note:hover svg {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Japanese Kanji Credit */
+.kanji-credit {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 0.7rem;
+  color: var(--fg-alt);
+  opacity: 0.6;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: 'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif;
+  letter-spacing: 0.1em;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+  user-select: none;
+}
+
+.kanji-credit:hover {
+  opacity: 1;
+}
+
+/* Loading state */
+.submit-button.loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.submit-button.loading span {
+  opacity: 0;
+}
+
+.submit-button.loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-top: 2px solid var(--bg);
+  border-radius: 50%;
+  animation: buttonSpin 1s linear infinite;
+}
+
+@keyframes buttonSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* SUCCESS ANIMATION STYLES */
+.success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.98);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  animation: successFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.success-content {
+  text-align: center;
+  padding: 3rem 2rem;
+  position: relative;
+  transform: translateY(40px) scale(0.9);
+  animation: successSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  opacity: 0;
+}
+
+.checkmark-container {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.checkmark {
+  transform: scale(0);
+  animation: checkmarkScale 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.6s forwards;
+}
+
+.checkmark-circle {
+  stroke-dasharray: 190;
+  stroke-dashoffset: 190;
+  animation: drawCircle 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards;
+}
+
+.checkmark-check {
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+  animation: drawCheck 0.4s cubic-bezier(0.4, 0, 0.2, 1) 1.8s forwards;
+}
+
+.success-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--fg);
+  margin-bottom: 0.75rem;
+  opacity: 0;
+  animation: successTextFade 0.6s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards;
+  letter-spacing: -0.01em;
+}
+
+.success-message {
+  font-size: 0.95rem;
+  color: var(--fg-alt);
+  opacity: 0;
+  animation: successTextFade 0.6s cubic-bezier(0.4, 0, 0.2, 1) 2.2s forwards;
+}
+
+.celebration-particles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+/* Animation Keyframes */
+@keyframes successFadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes successSlideUp {
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes checkmarkScale {
+  0% { transform: scale(0) rotate(-45deg); }
+  50% { transform: scale(1.1) rotate(-10deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes drawCircle {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes drawCheck {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes successTextFade {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes particle {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) scale(0);
+  }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Error icon animations */
+.error-icon {
+  transform: scale(0);
+  animation: errorIconScale 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.6s forwards;
+}
+
+.error-circle {
+  stroke-dasharray: 190;
+  stroke-dashoffset: 190;
+  animation: drawCircle 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards;
+}
+
+.error-x {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  animation: drawErrorX 0.4s cubic-bezier(0.4, 0, 0.2, 1) 1.8s forwards;
+}
+
+@keyframes errorIconScale {
+  0% { transform: scale(0) rotate(-45deg); }
+  50% { transform: scale(1.1) rotate(-10deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes drawErrorX {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Already subscribed icon animations */
+.already-subscribed-icon {
+  transform: scale(0);
+  animation: warningIconScale 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.6s forwards;
+}
+
+.already-subscribed-icon circle:first-child {
+  stroke-dasharray: 190;
+  stroke-dashoffset: 190;
+  animation: drawCircle 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards;
+}
+
+.already-subscribed-icon circle:last-child {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: drawInnerCircle 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.5s forwards;
+}
+
+.already-subscribed-icon path {
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+  animation: drawCheck 0.4s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards;
+}
+
+@keyframes warningIconScale {
+  0% { transform: scale(0) rotate(-15deg); }
+  50% { transform: scale(1.05) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes drawInnerCircle {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Enhanced shake animation for form inputs */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+/* Pulse animation for error states */
+.form-input.error {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+  animation: shake 0.5s ease-in-out, errorPulse 2s ease-in-out infinite;
+}
+
+@keyframes errorPulse {
+  0%, 100% { 
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+  }
+  50% { 
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+  }
+}
+
+/* Warning state for real-time validation */
+.form-input.warning {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced loading animation */
+.submit-button.loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-top: 2px solid var(--bg);
+  border-radius: 50%;
+  animation: buttonSpin 1s linear infinite;
+}
+
+/* Improved particle animations */
+@keyframes particle {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(calc(var(--dx) * 0.5), calc(var(--dy) * 0.5)) scale(0.8) rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) scale(0) rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .page-container {
+    padding: 1rem 0.75rem;
+  }
+
+  .content-wrapper {
+    border-radius: 12px;
+  }
+
+  .header-section {
+    padding: 2rem 1.5rem 1.25rem;
+  }
+
+  .form-container {
+    padding: 2rem 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .form-input {
+    height: 44px;
+  }
+
+  .submit-button {
+    height: 48px;
+  }
+
+  .checkbox-text {
+    font-size: 0.8rem;
+  }
+
+  .checkmark {
+    height: 18px;
+    width: 18px;
+  }
+
+  .checkmark:after {
+    left: 5px;
+    top: 1px;
+    width: 4px;
+    height: 7px;
+  }
+
+  .kanji-credit {
+    bottom: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.65rem;
+  }
+
+  .success-content {
+    padding: 2rem 1.5rem;
+  }
+  
+  .success-title {
+    font-size: 1.5rem;
+  }
+  
+  .success-message {
+    font-size: 0.9rem;
+  }
+  
+  .checkmark,
+  .error-icon,
+  .already-subscribed-icon {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  body {
+    background: var(--bg);
+  }
+
+  .content-wrapper::before {
+    display: none;
+  }
+
+  .header-section::before {
+    display: none;
+  }
+
+  .floating-particles {
+    display: none;
+  }
+
+  .error-icon,
+  .already-subscribed-icon,
+  .checkmark {
+    animation: none !important;
+    transform: scale(1) !important;
+  }
+  
+  .error-circle,
+  .error-x,
+  .checkmark-circle,
+  .checkmark-check {
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+  }
+  
+  .particle {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+  
+  .form-input.error {
+    animation: none !important;
+  }
+
+  .checkbox-container:hover {
+    transform: none;
+  }
+
+  .checkmark:after {
+    animation: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .form-input {
+    border-width: 3px;
+  }
+
+  .submit-button {
+    border: 2px solid transparent;
+  }
+
+  .checkmark {
+    border-width: 3px;
+  }
+
+  .error-icon {
+    stroke: #ffffff;
+  }
+  
+  .already-subscribed-icon {
+    stroke: #ffffff;
+  }
+  
+  .form-input.error {
+    border-width: 3px;
+    border-color: #ffffff;
+  }
+
+  .checkbox-container.error .checkmark {
+    border-width: 3px;
+  }
+
+  .terms-link {
+    text-decoration: underline;
+  }
+}
