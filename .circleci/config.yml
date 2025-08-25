@@ -1,0 +1,59 @@
+version: 2.1
+
+executors:
+  ubuntu-executor:
+    docker:
+      - image: cimg/base:stable
+
+jobs:
+  deploy-production:
+    executor: ubuntu-executor
+    steps:
+      - checkout
+      - run:
+          name: Deploy to Production EC2
+          command: |
+            echo "Starting production deployment..."
+            mkdir -p ~/.ssh
+            echo "$EC2_SSH_KEY" > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+            ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST << 'EOF'
+              cd ~/form-prod/form/
+              git config credential.helper store
+              echo "https://$GIT_AUTH_USERNAME:$GIT_AUTH_PASSWORD@github.com" > ~/.git-credentials
+              git pull origin main
+              docker-compose up -d --build
+            EOF
+
+  deploy-staging:
+    executor: ubuntu-executor
+    steps:
+      - checkout
+      - run:
+          name: Deploy to Staging EC2
+          command: |
+            echo "Starting staging deployment..."
+            mkdir -p ~/.ssh
+            echo "$EC2_SSH_KEY" > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+            ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST << 'EOF'
+              cd ~/form-stage/form/
+              git config credential.helper store
+              echo "https://$GIT_AUTH_USERNAME:$GIT_AUTH_PASSWORD@github.com" > ~/.git-credentials
+              git pull origin sub
+              docker-compose up -d --build
+            EOF
+
+workflows:
+  version: 2
+  deploy-workflow:
+    jobs:
+      - deploy-staging:
+          filters:
+            branches:
+              only: sub
+      - deploy-production:
+          filters:
+            branches:
+              only: main
+
