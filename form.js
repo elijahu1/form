@@ -308,11 +308,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("subscriptionForm");
   const nameInput = document.getElementById("name");
   const emailInput = document.getElementById("email");
+  const termsCheckbox = document.getElementById("termsCheckbox");
   const submitBtn = document.getElementById("submitBtn");
   const nameError = document.getElementById("nameError");
   const emailError = document.getElementById("emailError");
+  const termsError = document.getElementById("termsError");
   
-  if (!form || !nameInput || !emailInput || !submitBtn) {
+  if (!form || !nameInput || !emailInput || !termsCheckbox || !submitBtn) {
     console.error('Required form elements not found');
     return;
   }
@@ -327,7 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
     input.addEventListener('focus', (e) => {
       const label = e.target.previousElementSibling;
       if (label) {
-        label.style.color = 'var(--yellow)';
+        label.style.color = 'var(--accent)';
         label.style.transform = 'translateY(-2px)';
       }
     });
@@ -367,6 +369,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Terms checkbox validation
+  termsCheckbox.addEventListener("change", () => {
+    hideError(termsError);
+    const checkboxContainer = termsCheckbox.closest('.checkbox-container');
+    if (checkboxContainer) {
+      checkboxContainer.classList.remove('error');
+    }
+  });
+
   // Test function for debugging (you can remove this after testing)
   window.testErrorAnimation = (type) => {
     if (type === 'name') {
@@ -392,12 +403,14 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const name = nameInput.value.trim();
     const email = emailInput.value.trim().toLowerCase();
+    const termsAccepted = termsCheckbox.checked;
     
-    console.log('Form submitted with:', { name, email });
+    console.log('Form submitted with:', { name, email, termsAccepted });
     
     // Client-side validation
     let hasError = false;
     
+    // Name validation
     if (!name) {
       console.log('No name provided');
       showError(nameError);
@@ -413,6 +426,7 @@ document.addEventListener("DOMContentLoaded", () => {
       nameInput.classList.remove('error');
     }
     
+    // Email validation
     if (!email) {
       console.log('No email provided');
       showError(emailError);
@@ -426,6 +440,23 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       hideError(emailError);
       emailInput.classList.remove('error');
+    }
+    
+    // Terms validation
+    if (!termsAccepted) {
+      console.log('Terms not accepted');
+      showError(termsError);
+      const checkboxContainer = termsCheckbox.closest('.checkbox-container');
+      if (checkboxContainer) {
+        checkboxContainer.classList.add('error');
+      }
+      hasError = true;
+    } else {
+      hideError(termsError);
+      const checkboxContainer = termsCheckbox.closest('.checkbox-container');
+      if (checkboxContainer) {
+        checkboxContainer.classList.remove('error');
+      }
     }
     
     if (hasError) {
@@ -443,7 +474,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email })
+        body: JSON.stringify({ name, email, termsAccepted })
       });
       
       console.log('Response status:', response.status);

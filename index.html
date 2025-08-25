@@ -71,6 +71,29 @@
               what's your email address?
             </div>
           </div>
+          
+          <!-- Terms and Conditions Checkbox -->
+          <div class="input-group checkbox-group">
+            <label class="checkbox-container">
+              <input type="checkbox" id="termsCheckbox" name="terms" required>
+              <span class="checkmark"></span>
+              <span class="checkbox-text">
+                I agree to the 
+                <a href="/terms-and-conditions" target="_blank" class="terms-link">Terms & Conditions</a>
+                and 
+                <a href="/privacy-policy" target="_blank" class="terms-link">Privacy Policy</a>
+              </span>
+            </label>
+            <div class="error-message" id="termsError">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+              Please accept the terms and conditions
+            </div>
+          </div>
+          
           <button type="submit" class="submit-button" id="submitBtn">
             <span>Subscribe</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
