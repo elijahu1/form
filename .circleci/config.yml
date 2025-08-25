@@ -17,7 +17,7 @@ jobs:
             mkdir -p ~/.ssh
             echo "$EC2_SSH_KEY" > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
-            ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST << 'EOF'
+            ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST \<< 'EOF'
               cd ~/form-prod/form/
               git config credential.helper store
               echo "https://$GIT_AUTH_USERNAME:$GIT_AUTH_PASSWORD@github.com" > ~/.git-credentials
@@ -36,7 +36,7 @@ jobs:
             mkdir -p ~/.ssh
             echo "$EC2_SSH_KEY" > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
-            ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST << 'EOF'
+            ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST \<< 'EOF'
               cd ~/form-stage/form/
               git config credential.helper store
               echo "https://$GIT_AUTH_USERNAME:$GIT_AUTH_PASSWORD@github.com" > ~/.git-credentials
